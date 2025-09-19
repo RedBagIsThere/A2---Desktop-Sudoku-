@@ -13,7 +13,7 @@ int number_table[][]= {
 void setup(){
   
     fullScreen();
-    
+    textAlign(CENTER,CENTER);
 }
 
 void draw(){
@@ -65,7 +65,7 @@ void draw_number(float x, float y, float d){
         while(col<9){
             int output = number_table[row][col];
             fill(0);
-            text(output, x+d*col, y+d*row);
+            text(output, x+d*col + d/2, y+d*row + d/2);
             noFill();
             col += 1;
             
