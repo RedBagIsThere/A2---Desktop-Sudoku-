@@ -1,8 +1,8 @@
 int number_table[][]= {
+      {1,0,3,4,5,6,7,8,9},
       {1,2,3,4,5,6,7,8,9},
       {1,2,3,4,5,6,7,8,9},
-      {1,2,3,4,5,6,7,8,9},
-      {1,2,3,4,5,6,7,8,9},
+      {1,2,3,0,5,6,7,8,9},
       {1,2,3,4,5,6,7,8,9},
       {1,2,3,4,5,6,7,8,9},
       {1,2,3,4,5,6,7,8,9},
@@ -66,10 +66,14 @@ void draw_number(float x, float y, float d){
         int col = 0;
         
         while(col<9){
+          
             int output = number_table[row][col];
-            fill(0);
-            text(output, x+d*col + d/2, y+d*row + d/2);
-            noFill();
+            if(output != 0){
+                fill(0);
+                text(output, x+d*col + d/2, y+d*row + d/2);
+                noFill();
+            }
+
             col += 1;
             
         }
