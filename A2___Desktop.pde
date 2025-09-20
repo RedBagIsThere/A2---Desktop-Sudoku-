@@ -22,7 +22,7 @@ void draw(){
     
     background(255);
     draw_sudoku_table(800);
-    draw_select();
+    
 }
 
 void draw_sudoku_table(float s){
@@ -53,6 +53,7 @@ void draw_sudoku_table(float s){
     }
     
         draw_number(x, y, distance_between_line);
+        draw_select(x, y, distance_between_line);
 }
 
 void draw_number(float x, float y, float d){
@@ -84,14 +85,14 @@ void draw_number(float x, float y, float d){
     
 }
 
-void draw_select(){
-    int sqr_size = 80;
+void draw_select(float x, float y, float d){
+  
     int col = 0;
     while(col<9){
         int output = select_number[col];
         strokeWeight(3);
-        rect(width-200, 100+(col*sqr_size), sqr_size, sqr_size);
-        text(output, width-200+(sqr_size/2), 100+(col*sqr_size)+(sqr_size/2));
+        rect(x+d*10, y+(col*d), d, d);
+        text(output, x+d*10+(d/2), y+(col*d)+(d/2));
         col+=1;
     }
 }
