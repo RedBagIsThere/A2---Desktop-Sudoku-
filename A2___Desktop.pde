@@ -10,6 +10,8 @@ int number_table[][]= {
       {1,2,3,4,5,6,7,8,9},
     };
 
+int select_number[] = {1,2,3,4,5,6,7,8,9};
+
 void setup(){
   
     fullScreen();
@@ -20,6 +22,7 @@ void draw(){
     
     background(255);
     draw_sudoku_table(800);
+    draw_select();
 }
 
 void draw_sudoku_table(float s){
@@ -75,4 +78,16 @@ void draw_number(float x, float y, float d){
         
     }
     
+}
+
+void draw_select(){
+    int sqr_size = 80;
+    int col = 0;
+    while(col<9){
+        int output = select_number[col];
+        strokeWeight(3);
+        rect(width-200, 100+(col*sqr_size), sqr_size, sqr_size);
+        text(output, width-200+(sqr_size/2), 100+(col*sqr_size)+(sqr_size/2));
+        col+=1;
+    }
 }
