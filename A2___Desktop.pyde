@@ -21,7 +21,6 @@ def draw():
     
     background(255)
     draw_sudoku_table(800)
-    draw_select()
 
 def draw_sudoku_table(s):
   
@@ -49,6 +48,7 @@ def draw_sudoku_table(s):
         i+=1
         
         draw_number(x, y, distance_between_line)
+        draw_select(x, y, distance_between_line)
         
 def draw_number(x, y, d):
   
@@ -72,15 +72,15 @@ def draw_number(x, y, d):
         
         row+=1
         
-def draw_select():
+def draw_select(x, y, d):
     
     sqr_size = 80
     col = 0
     while col<9:
         output = select_number[col]
         strokeWeight(3)
-        rect(width-200, 100+(col*sqr_size), sqr_size, sqr_size)
-        text(output, width-200+(sqr_size/2), 100+(col*sqr_size)+(sqr_size/2))
+        rect(x+d*10, y+(col*d), d, d)
+        text(output, x+d*10+(d/2), y+(col*d)+(d/2))
         col+=1
     
     
