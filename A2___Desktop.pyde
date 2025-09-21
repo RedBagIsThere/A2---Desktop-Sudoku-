@@ -10,17 +10,18 @@ number_table= [
       [1,2,3,4,5,6,7,8,9],
     ]
 
+select_number = [1,2,3,4,5,6,7,8,9]
+
 size = 800
 distance_between_line = size/9
-select_number = [1,2,3,4,5,6,7,8,9]
 
 def setup():
     
-    global x,y
+    global x_start,y_start
     fullScreen()
     textAlign(CENTER,CENTER)
-    x =(displayWidth/2)-(size/2) #table first pos in a center of display
-    y = (displayHeight/2)-(size/2)
+    x_start =(displayWidth/2)-(size/2) #table first pos in a center of display
+    y_start = (displayHeight/2)-(size/2)
     
 def draw():
     
