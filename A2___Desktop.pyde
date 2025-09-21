@@ -10,24 +10,29 @@ number_table= [
       [1,2,3,4,5,6,7,8,9],
     ]
 
+size = 800
+distance_between_line = size/9
 select_number = [1,2,3,4,5,6,7,8,9]
 
 def setup():
     
+    global x,y
     fullScreen()
     textAlign(CENTER,CENTER)
+    x =(displayWidth/2)-(size/2) #table first pos in a center of display
+    y = (displayHeight/2)-(size/2)
     
 def draw():
     
     background(255)
-    draw_sudoku_table(800)
-
-def draw_sudoku_table(s):
-  
-    x =(width/2)-(s/2) #table first pos in a center of display
-    y = (height/2)-(s/2)
-    distance_between_line = s/9
     
+    draw_sudoku_table(x, y, distance_between_line, size);
+    draw_number(x, y, distance_between_line);
+    draw_select(x, y, distance_between_line)
+    
+
+def draw_sudoku_table(x, y, d, s):
+  
     strokeWeight(5)
     
     rect(x,y,s,s)
@@ -42,13 +47,11 @@ def draw_sudoku_table(s):
         else:
             strokeWeight(1)       
         
-        line(x + distance_between_line*i, y , x+ distance_between_line*i, y + distance_between_line*9) # x-axis line
-        line(x, y + distance_between_line*i , x + distance_between_line*9, y + distance_between_line*i) # y-axis line
+        line(x + d*i, y , x+ d*i, y + d*9) # x-axis line
+        line(x, y + d*i , x + d*9, y + d*i) # y-axis line
         
         i+=1
-        
-        draw_number(x, y, distance_between_line)
-        draw_select(x, y, distance_between_line)
+
         
 def draw_number(x, y, d):
   
