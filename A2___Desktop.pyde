@@ -10,6 +10,8 @@ number_table= [
       [1,2,3,4,5,6,7,8,9],
     ]
 
+select_number = [1,2,3,4,5,6,7,8,9]
+
 def setup():
     
     fullScreen()
@@ -19,7 +21,7 @@ def draw():
     
     background(255)
     draw_sudoku_table(800)
-
+    draw_select()
 
 def draw_sudoku_table(s):
   
@@ -67,7 +69,16 @@ def draw_number(x, y, d):
         
         row+=1
         
+def draw_select():
     
+    sqr_size = 80
+    col = 0
+    while col<9:
+        output = select_number[col]
+        strokeWeight(3)
+        rect(width-200, 100+(col*sqr_size), sqr_size, sqr_size)
+        text(output, width-200+(sqr_size/2), 100+(col*sqr_size)+(sqr_size/2))
+        col+=1
     
     
     
