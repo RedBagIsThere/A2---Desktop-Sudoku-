@@ -13,7 +13,8 @@ number_table= [
 def setup():
     
     fullScreen()
-
+    textAlign(CENTER,CENTER)
+    
 def draw():
     
     background(255)
@@ -60,7 +61,7 @@ def draw_number(x, y, d):
         while col<9:
             output = number_table[row][col]
             fill(0)
-            text(output, x+d*col, y+d*row)
+            text(output, x+d*col + d/2, y+d*row + d/2)
             noFill()
             col += 1
         
