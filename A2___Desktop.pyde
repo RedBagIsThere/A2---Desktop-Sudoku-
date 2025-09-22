@@ -15,6 +15,8 @@ select_number = [1,2,3,4,5,6,7,8,9]
 size = 800
 distance_between_line = size/9
 
+selected = 0
+
 def setup():
     
     global x_start,y_start
@@ -27,9 +29,10 @@ def draw():
     
     background(255)
     
-    draw_sudoku_table(x, y, distance_between_line, size);
-    draw_number(x, y, distance_between_line);
-    draw_select(x, y, distance_between_line)
+    draw_sudoku_table(x_start, y_start, distance_between_line, size);
+    draw_number(x_start, y_start, distance_between_line);
+    draw_select(x_start, y_start, distance_between_line)
+    pick_number(x_start, y_start, distance_between_line)
     
 
 def draw_sudoku_table(x, y, d, s):
@@ -86,6 +89,26 @@ def draw_select(x, y, d):
         rect(x+d*10, y+(col*d), d, d)
         text(output, x+d*10+(d/2), y+(col*d)+(d/2))
         col+=1
+        
+def pick_number(x, y, d):
+    
+    global selected
+        
+    row = 0
+        
+    while row <9:
+            
+        if mouseX >= x+d*10 and mouseX <= x+d*11 and mouseY >= y+d*row and mouseY <= y+ d*(row+1) : 
+                
+            if mouseButton == LEFT :
+                    
+                selected = select_number[row]
+                            
+            
+        row+=1
+    
+                 
+
     
     
     
