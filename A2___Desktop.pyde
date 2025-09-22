@@ -35,6 +35,7 @@ def draw():
     pick_number(x_start, y_start, distance_between_line)
     input_number(x_start, y_start, distance_between_line)
     check_sudoku_row(x_start, y_start, distance_between_line)
+    check_sudoku_col(x_start, y_start, distance_between_line)
 
     
 
@@ -157,5 +158,31 @@ def check_sudoku_row(x, y, d):
             col+=1
             
         row+=1
+    
+        
+def check_sudoku_col(x, y, d):
+    
+    #check col
+    col = 0
+    
+    while col<9:
+        
+        row = 0
+        
+        while row < 9:
+            i = 1
+            while row+i <9:
+
+                if number_table[row][col] == number_table[row+i][col] and number_table[row][col] != 0:
+                    fill(255, 0, 0, 50)
+                    rect(x+d*col, y+d*row, d, d)
+                    rect(x+d*col, y+d*(row+i), d, d)
+                    noFill()
+                    
+                i+=1
+                
+            row+=1
+            
+        col+=1
     
     
