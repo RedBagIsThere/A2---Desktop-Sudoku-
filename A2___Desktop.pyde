@@ -29,10 +29,11 @@ def draw():
     
     background(255)
     
-    draw_sudoku_table(x_start, y_start, distance_between_line, size);
-    draw_number(x_start, y_start, distance_between_line);
+    draw_sudoku_table(x_start, y_start, distance_between_line, size)
+    draw_number(x_start, y_start, distance_between_line)
     draw_select(x_start, y_start, distance_between_line)
     pick_number(x_start, y_start, distance_between_line)
+    input_number(x_start, y_start, distance_between_line)
     
 
 def draw_sudoku_table(x, y, d, s):
@@ -108,7 +109,24 @@ def pick_number(x, y, d):
         row+=1
     
                  
-
+def input_number(x, y, d):
     
+    row = 0
+    
+    while row <9:
+        
+        col = 0
+        
+        while col<9:
+            
+            if mouseX >= x+d*col and mouseX <= x+d*(col+1) and mouseY >= y+d*row and mouseY <= y+d*(row+1):
+                
+                if mouseButton == LEFT :
+                    
+                    number_table[row][col] = selected
+            
+            col+=1
+        
+        row+=1
     
     
