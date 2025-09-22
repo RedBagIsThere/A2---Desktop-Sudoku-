@@ -1,13 +1,13 @@
 number_table= [
-      [1,0,3,4,5,6,7,8,9],
-      [1,2,3,4,0,6,7,8,9],
-      [1,2,3,4,5,6,7,8,9],
-      [1,2,3,0,5,6,7,8,9],
-      [0,2,3,4,5,6,7,8,0],
-      [1,2,3,4,5,6,7,8,9],
-      [0,2,3,4,5,6,7,8,9],
-      [1,0,3,4,5,6,7,8,9],
-      [1,2,3,4,5,6,7,8,9],
+      [0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0],
     ]
 
 select_number = [1,2,3,4,5,6,7,8,9]
@@ -34,6 +34,8 @@ def draw():
     draw_select(x_start, y_start, distance_between_line)
     pick_number(x_start, y_start, distance_between_line)
     input_number(x_start, y_start, distance_between_line)
+    check_sudoku_row(x_start, y_start, distance_between_line)
+
     
 
 def draw_sudoku_table(x, y, d, s):
@@ -88,7 +90,9 @@ def draw_select(x, y, d):
         output = select_number[col]
         strokeWeight(3)
         rect(x+d*10, y+(col*d), d, d)
+        fill(0)
         text(output, x+d*10+(d/2), y+(col*d)+(d/2))
+        noFill()
         col+=1
         
 def pick_number(x, y, d):
@@ -127,6 +131,31 @@ def input_number(x, y, d):
             
             col+=1
         
+        row+=1
+        
+def check_sudoku_row(x, y, d):
+    
+    #check row
+    row = 0
+    
+    while row<9:
+        
+        col = 0
+        
+        while col < 9:
+            i = 1
+            while col+i <9:
+
+                if number_table[row][col] == number_table[row][col+i] and number_table[row][col] != 0:
+                    fill(255, 0, 0, 50)
+                    rect(x+d*col, y+d*row, d, d)
+                    rect(x+d*(col+i), y+d*row, d, d)
+                    noFill()
+                    
+                i+=1
+                
+            col+=1
+            
         row+=1
     
     
