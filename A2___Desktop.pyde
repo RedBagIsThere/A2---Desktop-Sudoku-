@@ -1,18 +1,17 @@
-select_number = [1,2,3,4,5,6,7,8,9]
-
 size = 800
-distance_between_line = size/9
-
-selected = 0
 
 def setup():
     
-    global x_start,y_start,number_table
+    global x_start,y_start,number_table,select_number,distance_between_line,selected
     fullScreen()
     textAlign(CENTER,CENTER)
     x_start =(displayWidth/2)-(size/2) #table first pos in a center of display
     y_start = (displayHeight/2)-(size/2)
     number_table= load_sudoku('table.txt')
+    select_number = [1,2,3,4,5,6,7,8,9]
+    distance_between_line = size/9
+    selected = 0
+    game_status = True
     
 def draw():
     
