@@ -10,6 +10,7 @@ number_table= [
       [0,0,0,0,0,0,0,0,0],
     ]
 
+
 select_number = [1,2,3,4,5,6,7,8,9]
 
 size = 800
@@ -202,5 +203,17 @@ def check_sudoku_box_3x3(x, y, d):
                 
             box_col+=3
         box_row+=3
+        
+def load_sudoku(file_name):
+    
+    table = []
+    
+    f = open(file_name)
+    for line in f:
+        row = [int(char) for char in line]
+        table.append(row)
+    close(file_name)
+    
+    return table
         
     
