@@ -1,16 +1,3 @@
-number_table= [
-      [0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0],
-    ]
-
-
 select_number = [1,2,3,4,5,6,7,8,9]
 
 size = 800
@@ -20,12 +7,12 @@ selected = 0
 
 def setup():
     
-    global x_start,y_start
+    global x_start,y_start,number_table
     fullScreen()
     textAlign(CENTER,CENTER)
     x_start =(displayWidth/2)-(size/2) #table first pos in a center of display
     y_start = (displayHeight/2)-(size/2)
-
+    number_table= load_sudoku('table.txt')
     
 def draw():
     
@@ -210,9 +197,9 @@ def load_sudoku(file_name):
     
     f = open(file_name)
     for line in f:
-        row = [int(char) for char in line]
+        row = [int(char) for char in line.strip()]
         table.append(row)
-    close(file_name)
+    f.close()
     
     return table
         
