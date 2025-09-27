@@ -24,6 +24,7 @@ def setup():
     textAlign(CENTER,CENTER)
     x_start =(displayWidth/2)-(size/2) #table first pos in a center of display
     y_start = (displayHeight/2)-(size/2)
+
     
 def draw():
     
@@ -36,6 +37,7 @@ def draw():
     input_number(x_start, y_start, distance_between_line)
     check_sudoku_row(x_start, y_start, distance_between_line)
     check_sudoku_col(x_start, y_start, distance_between_line)
+    check_sudoku_box_3x3(x_start, y_start, distance_between_line)
 
     
 
@@ -85,7 +87,6 @@ def draw_number(x, y, d):
         
 def draw_select(x, y, d):
     
-    sqr_size = 80
     col = 0
     while col<9:
         output = select_number[col]
@@ -101,13 +102,9 @@ def pick_number(x, y, d):
     global selected
         
     row = 0
-        
     while row <9:
-            
         if mouseX >= x+d*10 and mouseX <= x+d*11 and mouseY >= y+d*row and mouseY <= y+ d*(row+1) : 
-                
             if mouseButton == LEFT :
-                    
                 selected = select_number[row]
                             
             
@@ -117,19 +114,12 @@ def pick_number(x, y, d):
 def input_number(x, y, d):
     
     row = 0
-    
     while row <9:
-        
         col = 0
-        
         while col<9:
-            
             if mouseX >= x+d*col and mouseX <= x+d*(col+1) and mouseY >= y+d*row and mouseY <= y+d*(row+1):
-                
                 if mouseButton == LEFT :
-                    
                     number_table[row][col] = selected
-            
             col+=1
         
         row+=1
@@ -138,11 +128,8 @@ def check_sudoku_row(x, y, d):
     
     #check row
     row = 0
-    
     while row<9:
-        
         col = 0
-        
         while col < 9:
             i = 1
             while col+i <9:
@@ -154,9 +141,7 @@ def check_sudoku_row(x, y, d):
                     noFill()
                     
                 i+=1
-                
             col+=1
-            
         row+=1
     
         
@@ -164,11 +149,8 @@ def check_sudoku_col(x, y, d):
     
     #check col
     col = 0
-    
     while col<9:
-        
         row = 0
-        
         while row < 9:
             i = 1
             while row+i <9:
@@ -184,5 +166,41 @@ def check_sudoku_col(x, y, d):
             row+=1
             
         col+=1
-    
+        
+def check_sudoku_box_3x3(x, y, d):
+
+    box_row = 0
+    while box_row < 9: #box
+        box_col = 0
+        while box_col <9:
+            
+            row = 0
+            while row<3: #in box
+                col = 0
+                while col<3:
+                    current_row = box_row+row
+                    current_col = box_col+col
+                    
+                    i = 0
+                    while i<3: # check in box
+                        j = 0
+                        while j <3:
+                            check_row = box_row+i
+                            check_col = box_col+j
+                            if(current_row != check_row or current_col != check_col):
+                                if(number_table[current_row][current_col] == number_table[check_row][check_col] and number_table[current_row][current_col] != 0):
+                                    fill(255, 0, 0, 50)
+                                    rect(x+d*current_col, y+d*current_row, d, d)
+                                    rect(x+d*check_col, y+d*check_row, d, d)
+                                    noFill()
+                                
+                            j+=1
+                        i+=1
+                    
+                    col+=1
+                row+=1
+                
+            box_col+=3
+        box_row+=3
+        
     
