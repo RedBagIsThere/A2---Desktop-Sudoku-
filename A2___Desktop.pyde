@@ -16,13 +16,18 @@ def setup():
 def draw():
     
     background(255)
-
-    draw_sudoku_table(x_start, y_start, distance_between_line, size)
-    draw_number(x_start, y_start, distance_between_line)
-    draw_select(x_start, y_start, distance_between_line)
-    pick_number(x_start, y_start, distance_between_line)
-    input_number(x_start, y_start, distance_between_line)
-    check_sudoku(x_start, y_start, distance_between_line)
+    
+    if game_status == False:
+        
+        draw_sudoku_table(x_start, y_start, distance_between_line, size)
+        draw_number(x_start, y_start, distance_between_line)
+        draw_select(x_start, y_start, distance_between_line)
+        pick_number(x_start, y_start, distance_between_line)
+        input_number(x_start, y_start, distance_between_line)
+        check_sudoku(x_start, y_start, distance_between_line)
+    
+    else:
+        text("YOU WIN",width/2,height/2)
 
     
 def draw_sudoku_table(x, y, d, s):
@@ -264,14 +269,14 @@ def alert_sudoku_box_3x3(x, y, d):
         
 def check_sudoku(x, y, d):
     
-    global check_status
+    global game_status
     
     alert_sudoku_row(x, y, d)
     alert_sudoku_col(x, y, d)
     alert_sudoku_box_3x3(x, y, d)
     
     if check_sudoku_row(x, y, d) and check_sudoku_col(x, y, d) and check_sudoku_box_3x3(x, y, d):
-        check_status = True
+        game_status = True
 
 def load_sudoku(file_name):
     
