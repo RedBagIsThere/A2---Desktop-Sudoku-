@@ -130,7 +130,7 @@ def check_sudoku_row(x, y, d):
             col+=1
         row+=1
         
-        return True
+    return True
         
 def alert_sudoku_row(x, y, d):
     
@@ -172,7 +172,7 @@ def check_sudoku_col(x, y, d):
             
         col+=1
         
-        return True
+    return True
         
 def alert_sudoku_col(x, y, d):
         
@@ -229,7 +229,7 @@ def check_sudoku_box_3x3(x, y, d):
             box_col+=3
         box_row+=3
         
-        return True
+    return True
         
 def alert_sudoku_box_3x3(x, y, d):
         
