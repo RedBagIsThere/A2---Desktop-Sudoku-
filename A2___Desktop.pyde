@@ -2,7 +2,7 @@ size = 800
 
 def setup():
     
-    global x_start,y_start,number_table,select_number,distance_between_line,selected
+    global x_start,y_start,number_table,select_number,distance_between_line,selected,game_status
     fullScreen()
     textAlign(CENTER,CENTER)
     x_start =(displayWidth/2)-(size/2) #table first pos in a center of display
@@ -16,7 +16,7 @@ def setup():
 def draw():
     
     background(255)
-    
+        
     draw_sudoku_table(x_start, y_start, distance_between_line, size)
     draw_number(x_start, y_start, distance_between_line)
     draw_select(x_start, y_start, distance_between_line)
@@ -24,7 +24,6 @@ def draw():
     input_number(x_start, y_start, distance_between_line)
     check_sudoku(x_start, y_start, distance_between_line)
     
-
 def draw_sudoku_table(x, y, d, s):
   
     strokeWeight(5)
@@ -118,17 +117,31 @@ def check_sudoku_row(x, y, d):
             i = 1
             while col+i <9:
 
+                if number_table[row][col] == number_table[row][col+i] or number_table[row][col] == 0:
+                    return False
+                else:
+                    return True
+                    
+                i+=1
+            col+=1
+        row+=1
+        
+        
+def alert_sudoku_row(x, y, d):
+    
+    #check row
+    row = 0
+    while row<9:
+        col = 0
+        while col < 9:
+            i = 1
+            while col+i <9:
+
                 if number_table[row][col] == number_table[row][col+i] and number_table[row][col] != 0:
                     fill(255, 0, 0, 50)
                     rect(x+d*col, y+d*row, d, d)
                     rect(x+d*(col+i), y+d*row, d, d)
                     noFill()
-                    return False
-                    
-                elif number_table[row][col] == 0:
-                    return False
-                else:
-                    return True
                     
                 i+=1
             col+=1
@@ -145,18 +158,32 @@ def check_sudoku_col(x, y, d):
             i = 1
             while row+i <9:
 
+                if number_table[row][col] == number_table[row+i][col] and number_table[row][col] == 0:
+                    return False
+                else:
+                    return True
+                    
+                i+=1
+                
+            row+=1
+            
+        col+=1
+        
+def alert_sudoku_col(x, y, d):
+        
+    #check col
+    col = 0
+    while col<9:
+        row = 0
+        while row < 9:
+            i = 1
+            while row+i <9:
+
                 if number_table[row][col] == number_table[row+i][col] and number_table[row][col] != 0:
                     fill(255, 0, 0, 50)
                     rect(x+d*col, y+d*row, d, d)
                     rect(x+d*col, y+d*(row+i), d, d)
                     noFill()
-                    return False
-                
-                elif number_table[row][col] == 0:
-                    return False
-                
-                else:
-                    return True
                     
                 i+=1
                 
@@ -185,15 +212,7 @@ def check_sudoku_box_3x3(x, y, d):
                             check_row = box_row+i
                             check_col = box_col+j
                             if(current_row != check_row or current_col != check_col):
-                                if(number_table[current_row][current_col] == number_table[check_row][check_col] and number_table[current_row][current_col] != 0):
-                                    fill(255, 0, 0, 50)
-                                    rect(x+d*current_col, y+d*current_row, d, d)
-                                    rect(x+d*check_col, y+d*check_row, d, d)
-                                    noFill()
-        
-                                    return False
-                    
-                                elif number_table[row][col] == 0:
+                                if(number_table[current_row][current_col] == number_table[check_row][check_col] and number_table[current_row][current_col] == 0):
                                     return False
                                 else:
                                     return True
@@ -207,13 +226,49 @@ def check_sudoku_box_3x3(x, y, d):
             box_col+=3
         box_row+=3
         
+def alert_sudoku_box_3x3(x, y, d):
+        
+    box_row = 0
+    while box_row < 9: #box
+        box_col = 0
+        while box_col <9:
+            
+            row = 0
+            while row<3: #in box
+                col = 0
+                while col<3:
+                    current_row = box_row+row
+                    current_col = box_col+col
+                    
+                    i = 0
+                    while i<3: # check in box
+                        j = 0
+                        while j <3:
+                            check_row = box_row+i
+                            check_col = box_col+j
+                            if(current_row != check_row or current_col != check_col):
+                                if(number_table[current_row][current_col] == number_table[check_row][check_col] and number_table[current_row][current_col] != 0):
+                                    fill(255, 0, 0, 50)
+                                    rect(x+d*current_col, y+d*current_row, d, d)
+                                    rect(x+d*check_col, y+d*check_row, d, d)
+                                    noFill()
+
+                            j+=1
+                        i+=1
+                    
+                    col+=1
+                row+=1
+                
+            box_col+=3
+        box_row+=3
+        
 def check_sudoku(x, y, d):
     
     global check_status
     
-    check_sudoku_row(x, y, d)
-    check_sudoku_col(x, y, d)
-    check_sudoku_box_3x3(x, y, d)
+    alert_sudoku_row(x, y, d)
+    alert_sudoku_col(x, y, d)
+    alert_sudoku_box_3x3(x, y, d)
     
     if check_sudoku_row(x, y, d) and check_sudoku_col(x, y, d) and check_sudoku_box_3x3(x, y, d):
         check_status = True
