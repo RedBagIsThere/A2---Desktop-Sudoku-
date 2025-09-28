@@ -11,22 +11,18 @@ def setup():
     select_number = [1,2,3,4,5,6,7,8,9]
     distance_between_line = size/9
     selected = 0
-    game_status = True
+    game_status = False
     
 def draw():
     
     background(255)
-    
+        
     draw_sudoku_table(x_start, y_start, distance_between_line, size)
     draw_number(x_start, y_start, distance_between_line)
     draw_select(x_start, y_start, distance_between_line)
     pick_number(x_start, y_start, distance_between_line)
     input_number(x_start, y_start, distance_between_line)
-    check_sudoku_row(x_start, y_start, distance_between_line)
-    check_sudoku_col(x_start, y_start, distance_between_line)
-    check_sudoku_box_3x3(x_start, y_start, distance_between_line)
-
-    
+    check_sudoku(x_start, y_start, distance_between_line)
 
 def draw_sudoku_table(x, y, d, s):
   
@@ -113,6 +109,8 @@ def input_number(x, y, d):
         
 def check_sudoku_row(x, y, d):
     
+    global game_status
+    
     #check row
     row = 0
     while row<9:
@@ -126,6 +124,11 @@ def check_sudoku_row(x, y, d):
                     rect(x+d*col, y+d*row, d, d)
                     rect(x+d*(col+i), y+d*row, d, d)
                     noFill()
+                    game_status = False
+                    
+                if number_table[row][col] == 0:
+                    
+                    game_status = False
                     
                 i+=1
             col+=1
@@ -133,6 +136,8 @@ def check_sudoku_row(x, y, d):
     
         
 def check_sudoku_col(x, y, d):
+    
+    global game_status
     
     #check col
     col = 0
@@ -147,6 +152,7 @@ def check_sudoku_col(x, y, d):
                     rect(x+d*col, y+d*row, d, d)
                     rect(x+d*col, y+d*(row+i), d, d)
                     noFill()
+                    game_status = False
                     
                 i+=1
                 
@@ -155,7 +161,9 @@ def check_sudoku_col(x, y, d):
         col+=1
         
 def check_sudoku_box_3x3(x, y, d):
-
+    
+    global game_status
+    
     box_row = 0
     while box_row < 9: #box
         box_col = 0
@@ -180,6 +188,7 @@ def check_sudoku_box_3x3(x, y, d):
                                     rect(x+d*current_col, y+d*current_row, d, d)
                                     rect(x+d*check_col, y+d*check_row, d, d)
                                     noFill()
+                                    game_status = False
                                 
                             j+=1
                         i+=1
@@ -190,6 +199,12 @@ def check_sudoku_box_3x3(x, y, d):
             box_col+=3
         box_row+=3
         
+def check_sudoku(x, y, d):
+    
+    check_sudoku_row(x, y, d)
+    check_sudoku_col(x, y, d)
+    check_sudoku_box_3x3(x, y, d)
+
 def load_sudoku(file_name):
     
     table = []
@@ -201,5 +216,7 @@ def load_sudoku(file_name):
     f.close()
     
     return table
+
+
         
     
