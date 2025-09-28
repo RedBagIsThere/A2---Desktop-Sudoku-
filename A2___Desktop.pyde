@@ -16,13 +16,14 @@ def setup():
 def draw():
     
     background(255)
-        
+
     draw_sudoku_table(x_start, y_start, distance_between_line, size)
     draw_number(x_start, y_start, distance_between_line)
     draw_select(x_start, y_start, distance_between_line)
     pick_number(x_start, y_start, distance_between_line)
     input_number(x_start, y_start, distance_between_line)
     check_sudoku(x_start, y_start, distance_between_line)
+
     
 def draw_sudoku_table(x, y, d, s):
   
@@ -119,13 +120,12 @@ def check_sudoku_row(x, y, d):
 
                 if number_table[row][col] == number_table[row][col+i] or number_table[row][col] == 0:
                     return False
-                else:
-                    return True
-                    
+                
                 i+=1
             col+=1
         row+=1
         
+        return True
         
 def alert_sudoku_row(x, y, d):
     
@@ -160,14 +160,14 @@ def check_sudoku_col(x, y, d):
 
                 if number_table[row][col] == number_table[row+i][col] and number_table[row][col] == 0:
                     return False
-                else:
-                    return True
-                    
+
                 i+=1
                 
             row+=1
             
         col+=1
+        
+        return True
         
 def alert_sudoku_col(x, y, d):
         
@@ -214,8 +214,6 @@ def check_sudoku_box_3x3(x, y, d):
                             if(current_row != check_row or current_col != check_col):
                                 if(number_table[current_row][current_col] == number_table[check_row][check_col] and number_table[current_row][current_col] == 0):
                                     return False
-                                else:
-                                    return True
                                 
                             j+=1
                         i+=1
@@ -225,6 +223,8 @@ def check_sudoku_box_3x3(x, y, d):
                 
             box_col+=3
         box_row+=3
+        
+        return True
         
 def alert_sudoku_box_3x3(x, y, d):
         
