@@ -283,12 +283,27 @@ def load_sudoku(file_name):
     table = []
     
     f = open(file_name)
-    for line in f:
-        row = [int(char) for char in line.strip()]
+    
+    i=0
+    while i<9:
+        line = f.readline()
+        
+        row = []
+        strip_line = line.strip()
+        
+        j=0
+        while j<len(strip_line):
+            num = int(strip_line[j])
+            row.append(num)
+            j+=1
+            
         table.append(row)
+        i+=1
+        
     f.close()
     
     return table
+
 
 
         
