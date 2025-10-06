@@ -113,7 +113,7 @@ def input_number(x, y, d):
         
         row+=1
         
-def check_sudoku_row(x, y, d):
+def check_sudoku_row():
     
     #check row
     row = 0
@@ -153,7 +153,7 @@ def alert_sudoku_row(x, y, d):
         row+=1
     
         
-def check_sudoku_col(x, y, d):
+def check_sudoku_col():
         
     #check col
     col = 0
@@ -196,7 +196,7 @@ def alert_sudoku_col(x, y, d):
             
         col+=1
         
-def check_sudoku_box_3x3(x, y, d):
+def check_sudoku_box_3x3():
         
     box_row = 0
     while box_row < 9: #box
@@ -275,7 +275,7 @@ def check_sudoku(x, y, d):
     alert_sudoku_col(x, y, d)
     alert_sudoku_box_3x3(x, y, d)
     
-    if check_sudoku_row(x, y, d) and check_sudoku_col(x, y, d) and check_sudoku_box_3x3(x, y, d):
+    if check_sudoku_row() and check_sudoku_col() and check_sudoku_box_3x3():
         game_status = True
 
 def load_sudoku(file_name):
